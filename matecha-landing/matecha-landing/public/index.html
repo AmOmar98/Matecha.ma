@@ -26,7 +26,24 @@
       --font-ui: 'DM Sans', system-ui, sans-serif;
     }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 80px; }
+
+    /* ─── SKIP LINK ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 50%; transform: translateX(-50%);
+      background: var(--red); color: white; padding: 0.75rem 1.5rem;
+      border-radius: 0 0 12px 12px; font-family: var(--font-ui);
+      font-size: 0.85rem; font-weight: 600; z-index: 200;
+      text-decoration: none; transition: top 0.3s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ─── FOCUS STYLES ─── */
+    :focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
 
     body {
       font-family: var(--font-body);
@@ -112,8 +129,12 @@
       transition: all 0.25s !important;
     }
     .nav-cta:hover { background: var(--red-dark) !important; transform: translateY(-1px); }
-    .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-links a.active { color: var(--red); }
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
     .nav-burger span { display: block; width: 22px; height: 2px; background: var(--dark); margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
+    .nav-burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
     /* ─── HERO ─── */
     .hero {
@@ -503,8 +524,8 @@
       display: flex; align-items: center; justify-content: space-between;
       cursor: pointer; width: 100%; background: none; border: none;
       font-family: var(--font-ui); font-size: 1rem; font-weight: 600;
-      color: var(--dark); text-align: left; padding: 0.4rem 0;
-      transition: color 0.25s;
+      color: var(--dark); text-align: left; padding: 0.75rem 0;
+      transition: color 0.25s; gap: 1rem;
     }
     .faq-q:hover { color: var(--red); }
     .faq-q .icon {
@@ -594,6 +615,68 @@
     }
     .footer-socials a:hover { background: var(--red); color: white; }
 
+    /* ─── FLOATING WHATSAPP ─── */
+    .whatsapp-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 90;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: #25D366; color: white;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      text-decoration: none; transition: all 0.3s;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.5); }
+    .whatsapp-float svg { width: 30px; height: 30px; }
+    .whatsapp-float .tooltip {
+      position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
+      background: var(--dark); color: white; padding: 0.5rem 1rem;
+      border-radius: 10px; font-family: var(--font-ui); font-size: 0.8rem;
+      font-weight: 500; white-space: nowrap; opacity: 0;
+      pointer-events: none; transition: opacity 0.3s;
+    }
+    .whatsapp-float .tooltip::after {
+      content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
+      border: 6px solid transparent; border-left-color: var(--dark);
+    }
+    .whatsapp-float:hover .tooltip { opacity: 1; }
+
+    /* ─── BACK TO TOP ─── */
+    .back-to-top {
+      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 90;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--white); color: var(--dark);
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      transition: all 0.3s; opacity: 0; pointer-events: none;
+      transform: translateY(10px);
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .back-to-top:hover { background: var(--red); color: white; border-color: var(--red); }
+
+    /* ─── STATS SECTION ─── */
+    .stats {
+      background: var(--white); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+    }
+    .stats-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+      text-align: center;
+    }
+    .stat-item { padding: 1rem; }
+    .stat-number {
+      font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 900; color: var(--red); line-height: 1.1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-family: var(--font-ui); font-size: 0.85rem; font-weight: 500;
+      color: var(--gray);
+    }
+
     /* ─── MOBILE ─── */
     @media (max-width: 900px) {
       .nav-links { display: none; }
@@ -611,27 +694,38 @@
       .footer-inner { grid-template-columns: 1fr 1fr; }
       .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
     }
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .whatsapp-float { width: 54px; height: 54px; bottom: 1.25rem; right: 1.25rem; }
+      .whatsapp-float svg { width: 26px; height: 26px; }
+      .whatsapp-float .tooltip { display: none; }
+      .back-to-top { bottom: 1.25rem; left: 1.25rem; width: 40px; height: 40px; }
+    }
     @media (max-width: 600px) {
       section { padding: 4rem 1.25rem; }
       .footer-inner { grid-template-columns: 1fr; }
       .hero { padding: 6rem 1.25rem 3rem; }
+      .stats { padding: 2rem 1.25rem; }
+      .stats-grid { gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
+<a href="#hero" class="skip-link">Aller au contenu principal</a>
+
 <!-- ════ NAV ════ -->
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#" class="nav-logo">Mate<span>cha</span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks" role="navigation" aria-label="Navigation principale">
       <a href="#how">Comment ça marche</a>
       <a href="#why">Avantages</a>
       <a href="#offers">Offres</a>
       <a href="#faq">FAQ</a>
       <a href="https://wa.me/212XXXXXXXXX?text=Salam!%20Je%20veux%20commander%20mes%20courses%20avec%20Matecha" class="nav-cta">Commander →</a>
     </div>
-    <button class="nav-burger" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+    <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -683,6 +777,28 @@
           <div class="amount">−15 dh</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ STATS ════ -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-number" data-target="500">0+</div>
+      <div class="stat-label">Commandes livrees</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-number" data-target="40">0%</div>
+      <div class="stat-label">D'economies en moyenne</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-number" data-target="24">0h</div>
+      <div class="stat-label">Delai de livraison max</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+      <div class="stat-number" data-target="15">0+</div>
+      <div class="stat-label">Fournisseurs compares</div>
     </div>
   </div>
 </section>
@@ -884,42 +1000,42 @@
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <button class="faq-q" onclick="var p=this.parentElement;p.classList.toggle('open');this.setAttribute('aria-expanded',p.classList.contains('open'))" aria-expanded="false">
           Quelles zones de Fès sont couvertes ?
           <span class="icon">+</span>
         </button>
         <div class="faq-a"><p>Nous couvrons actuellement les principaux quartiers de Fès : Saïss, Narjiss, Agdal, Route d'Imouzzer et la Ville Nouvelle. Nous étendons progressivement notre zone de livraison.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <button class="faq-q" onclick="var p=this.parentElement;p.classList.toggle('open');this.setAttribute('aria-expanded',p.classList.contains('open'))" aria-expanded="false">
           Quels sont les délais de livraison ?
           <span class="icon">+</span>
         </button>
         <div class="faq-a"><p>Vos courses sont livrées en moins de 24 heures. Les commandes passées avant 20h sont généralement livrées le lendemain matin.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <button class="faq-q" onclick="var p=this.parentElement;p.classList.toggle('open');this.setAttribute('aria-expanded',p.classList.contains('open'))" aria-expanded="false">
           Comment se fait le paiement ?
           <span class="icon">+</span>
         </button>
         <div class="faq-a"><p>Le paiement se fait à la livraison en espèces. Nous travaillons sur l'intégration de paiements mobiles pour bientôt.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <button class="faq-q" onclick="var p=this.parentElement;p.classList.toggle('open');this.setAttribute('aria-expanded',p.classList.contains('open'))" aria-expanded="false">
           Est-ce que je peux choisir mon fournisseur ?
           <span class="icon">+</span>
         </button>
         <div class="faq-a"><p>Oui ! Matecha vous montre les prix de chaque fournisseur. Par défaut, on sélectionne le moins cher, mais vous pouvez choisir un autre fournisseur si vous le préférez.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <button class="faq-q" onclick="var p=this.parentElement;p.classList.toggle('open');this.setAttribute('aria-expanded',p.classList.contains('open'))" aria-expanded="false">
           Dois-je télécharger une application ?
           <span class="icon">+</span>
         </button>
         <div class="faq-a"><p>Non, aucune application à télécharger ! Tout fonctionne via WhatsApp. Vous envoyez votre liste et on s'occupe du reste.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <button class="faq-q" onclick="var p=this.parentElement;p.classList.toggle('open');this.setAttribute('aria-expanded',p.classList.contains('open'))" aria-expanded="false">
           Comment sont vérifiés les prix ?
           <span class="icon">+</span>
         </button>
@@ -938,6 +1054,13 @@
     Commander sur WhatsApp
   </a>
 </section>
+
+<!-- ════ FLOATING ELEMENTS ════ -->
+<a href="https://wa.me/212XXXXXXXXX?text=Salam!%20Je%20veux%20commander%20mes%20courses%20avec%20Matecha" class="whatsapp-float" aria-label="Commander sur WhatsApp">
+  <span class="tooltip">Besoin d'aide ? Ecrivez-nous !</span>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut de page">&#8593;</button>
 
 <!-- ════ FOOTER ════ -->
 <footer>
@@ -980,9 +1103,63 @@
 <script>
   // Navbar scroll effect
   const nav = document.getElementById('navbar');
+  const backToTop = document.getElementById('backToTop');
+
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
+    backToTop.classList.toggle('visible', window.scrollY > 600);
   });
+
+  // Back to top
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Mobile nav toggle
+  const burger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+
+  burger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('show');
+    burger.classList.toggle('open');
+    burger.setAttribute('aria-expanded', isOpen);
+    burger.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+  });
+
+  // Close mobile nav when clicking a link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('show');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Ouvrir le menu');
+    });
+  });
+
+  // Close mobile nav when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && navLinks.classList.contains('show')) {
+      navLinks.classList.remove('show');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Active nav link highlighting on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = navLinks.querySelectorAll('a[href^="#"]');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navAnchors.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-80px 0px -40% 0px' });
+  sections.forEach(s => sectionObserver.observe(s));
 
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
@@ -995,7 +1172,31 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => observer.observe(el));
 
-  // Mobile nav
+  // Animated counters
+  const counters = document.querySelectorAll('.stat-number[data-target]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        const suffix = el.textContent.replace(/[0-9]/g, '');
+        let current = 0;
+        const increment = Math.ceil(target / 40);
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = current + suffix;
+        }, 30);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+
+  // Mobile nav styles
   const style = document.createElement('style');
   style.textContent = `
     @media (max-width: 900px) {
@@ -1003,14 +1204,32 @@
         display: flex !important; flex-direction: column;
         position: absolute; top: 100%; left: 0; right: 0;
         background: rgba(255,255,255,0.98); backdrop-filter: blur(16px);
-        padding: 1.5rem; gap: 1rem;
+        padding: 1.5rem; gap: 0.5rem;
         border-bottom: 1px solid var(--border);
         box-shadow: 0 8px 30px rgba(0,0,0,0.08);
         animation: fadeIn 0.3s ease;
       }
+      .nav-links.show a {
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        transition: background 0.2s;
+      }
+      .nav-links.show a:hover {
+        background: var(--cream);
+      }
     }
   `;
   document.head.appendChild(style);
+
+  // Keyboard: close mobile nav on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('show')) {
+      navLinks.classList.remove('show');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.focus();
+    }
+  });
 </script>
 
 </body>
