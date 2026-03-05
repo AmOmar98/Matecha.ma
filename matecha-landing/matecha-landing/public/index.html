@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matecha — Vos courses au meilleur prix, livrées chez vous</title>
+  <meta name="description" content="Matecha compare les prix de vos courses alimentaires à Fès et vous livre en moins de 24h. Envoyez votre liste sur WhatsApp, on s'occupe du reste.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #E00000;
+      --red-dark: #B80000;
+      --orange: #FFB86F;
+      --orange-light: #FFEBD6;
+      --cream: #FFF8F0;
+      --white: #FFFFFF;
+      --dark: #1A1A2E;
+      --gray: #555566;
+      --gray-light: #888899;
+      --border: #EEE5DD;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Crimson Text', Georgia, serif;
+      --font-ui: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--dark);
+      background: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(224,0,0,0.3); }
+      50% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(224,0,0,0); }
+    }
+    @keyframes grain {
+      0%, 100% { transform: translate(0, 0); }
+      10% { transform: translate(-5%, -10%); }
+      30% { transform: translate(3%, -15%); }
+      50% { transform: translate(12%, 9%); }
+      70% { transform: translate(9%, 4%); }
+      90% { transform: translate(-1%, 7%); }
+    }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem; font-weight: 800;
+      color: var(--red); text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-family: var(--font-ui); font-size: 0.85rem; font-weight: 500;
+      color: var(--gray); text-decoration: none;
+      transition: color 0.25s;
+      letter-spacing: 0.02em;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta {
+      background: var(--red) !important; color: var(--white) !important;
+      padding: 0.55rem 1.3rem !important; border-radius: 50px;
+      font-weight: 600 !important; font-size: 0.82rem !important;
+      transition: all 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--red-dark) !important; transform: translateY(-1px); }
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--dark); margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      background: linear-gradient(165deg, var(--cream) 0%, var(--white) 40%, var(--orange-light) 100%);
+      overflow: hidden;
+      padding: 7rem 1.5rem 4rem;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E00000' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+    .hero-deco-1 {
+      position: absolute; top: 10%; right: -5%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,184,111,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero-deco-2 {
+      position: absolute; bottom: -10%; left: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(224,0,0,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(224,0,0,0.08); border: 1px solid rgba(224,0,0,0.15);
+      padding: 0.4rem 1rem; border-radius: 50px;
+      font-family: var(--font-ui); font-size: 0.78rem; font-weight: 600;
+      color: var(--red); margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .hero-badge::before { content: '🇲🇦'; }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 900; line-height: 1.1;
+      color: var(--dark); letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.8s ease 0.1s forwards; opacity: 0;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--red), #FF4444);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem; line-height: 1.7;
+      color: var(--gray); max-width: 500px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease 0.25s forwards; opacity: 0;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
+      animation: fadeUp 0.8s ease 0.4s forwards; opacity: 0;
+    }
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: #25D366; color: var(--white);
+      padding: 1rem 2rem; border-radius: 60px;
+      font-family: var(--font-ui); font-size: 1rem; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.3s; box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.4); }
+    .btn-whatsapp svg { width: 22px; height: 22px; }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 1rem 1.8rem; border-radius: 60px;
+      font-family: var(--font-ui); font-size: 0.95rem; font-weight: 500;
+      color: var(--dark); text-decoration: none;
+      background: var(--white); border: 1.5px solid var(--border);
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--red); color: var(--red); }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+      animation: scaleIn 1s ease 0.3s forwards; opacity: 0;
+    }
+    .hero-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+    }
+    .hero-card-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-ui); font-size: 0.85rem; font-weight: 600;
+      color: var(--dark);
+    }
+    .hero-card-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--red), #FF4444);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: 1.2rem;
+    }
+    .price-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 1rem; border-radius: 14px;
+      margin-bottom: 0.5rem; transition: all 0.3s;
+      font-family: var(--font-ui);
+    }
+    .price-row:hover { transform: translateX(4px); }
+    .price-row.best { background: rgba(37,211,102,0.08); border: 1.5px solid rgba(37,211,102,0.2); }
+    .price-row.other { background: var(--cream); border: 1.5px solid transparent; }
+    .price-row .store { font-size: 0.9rem; font-weight: 500; color: var(--dark); display: flex; align-items: center; gap: 0.5rem; }
+    .price-row .price { font-size: 1rem; font-weight: 700; }
+    .price-row.best .price { color: #25D366; }
+    .price-row.other .price { color: var(--gray-light); text-decoration: line-through; }
+    .price-row .badge-best {
+      font-size: 0.65rem; font-weight: 700;
+      background: #25D366; color: white;
+      padding: 0.15rem 0.5rem; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .savings-bar {
+      margin-top: 1.2rem; padding: 1rem 1.2rem;
+      background: linear-gradient(135deg, var(--red), #FF4444);
+      border-radius: 14px; color: white;
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: var(--font-ui);
+    }
+    .savings-bar .label { font-size: 0.82rem; font-weight: 500; opacity: 0.9; }
+    .savings-bar .amount { font-size: 1.4rem; font-weight: 700; }
+
+    /* Floating badges around hero card */
+    .hero-float {
+      position: absolute; padding: 0.6rem 1rem;
+      background: var(--white); border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      font-family: var(--font-ui); font-size: 0.8rem; font-weight: 600;
+      display: flex; align-items: center; gap: 0.4rem;
+      animation: float 6s ease-in-out infinite;
+    }
+    .hero-float-1 { top: -10px; right: -20px; animation-delay: 0s; color: #25D366; }
+    .hero-float-2 { bottom: 40px; left: -30px; animation-delay: 2s; color: var(--red); }
+
+    /* ─── SECTION COMMONS ─── */
+    section { padding: 6rem 1.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-family: var(--font-ui); font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--red); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800; line-height: 1.15;
+      color: var(--dark); letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      font-size: 1.1rem; line-height: 1.7;
+      color: var(--gray); max-width: 600px;
+    }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-header .section-desc { margin: 0 auto; }
+
+    /* ─── HOW IT WORKS ─── */
+    .how { background: var(--white); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .step {
+      text-align: center; padding: 2.5rem 1.5rem;
+      border-radius: 24px; position: relative;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .step:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(224,0,0,0.08);
+      border-color: rgba(224,0,0,0.15);
+    }
+    .step-num {
+      position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--red); color: white;
+      font-family: var(--font-ui); font-size: 0.85rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-icon {
+      width: 72px; height: 72px; border-radius: 20px;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0.5rem auto 1.2rem; font-size: 2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .step h3 {
+      font-family: var(--font-ui); font-size: 1.05rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 0.6rem;
+    }
+    .step p {
+      font-size: 0.95rem; line-height: 1.6; color: var(--gray);
+    }
+    .step-connector {
+      display: none; /* shown on desktop via pseudo or we skip for clean look */
+    }
+
+    /* ─── WHY MATECHA ─── */
+    .why { background: var(--cream); position: relative; overflow: hidden; }
+    .why::before {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(224,0,0,0.04) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .benefits { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .benefit {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative; overflow: hidden;
+    }
+    .benefit:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+    }
+    .benefit::after {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 4px; height: 0; background: var(--red);
+      border-radius: 0 0 4px 0;
+      transition: height 0.4s ease;
+    }
+    .benefit:hover::after { height: 100%; }
+    .benefit-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1rem;
+    }
+    .benefit-icon.eco { background: rgba(37,211,102,0.1); }
+    .benefit-icon.time { background: rgba(255,184,111,0.2); }
+    .benefit-icon.simple { background: rgba(224,0,0,0.08); }
+    .benefit-icon.trust { background: rgba(100,100,220,0.1); }
+    .benefit h3 {
+      font-family: var(--font-ui); font-size: 1.05rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 0.5rem;
+    }
+    .benefit p { font-size: 0.95rem; line-height: 1.6; color: var(--gray); }
+
+    /* ─── COMPARATEUR DEMO ─── */
+    .compare { background: var(--white); }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .compare-text .section-desc { margin-bottom: 1.5rem; }
+    .compare-demo {
+      background: var(--cream); border-radius: 24px;
+      padding: 2rem; border: 1px solid var(--border);
+    }
+    .compare-product {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-ui);
+    }
+    .compare-product-img {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: var(--white); display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .compare-product-name { font-weight: 700; font-size: 1rem; color: var(--dark); }
+    .compare-product-cat { font-size: 0.8rem; color: var(--gray-light); }
+    .compare-supplier {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1.1rem; border-radius: 14px;
+      margin-bottom: 0.5rem; font-family: var(--font-ui);
+      border: 1.5px solid transparent; transition: all 0.3s;
+    }
+    .compare-supplier.winner {
+      background: rgba(37,211,102,0.06);
+      border-color: rgba(37,211,102,0.2);
+    }
+    .compare-supplier.loser { background: var(--white); }
+    .compare-supplier .name { font-size: 0.88rem; font-weight: 500; color: var(--dark); }
+    .compare-supplier .tag {
+      font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.5rem;
+      border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .compare-supplier.winner .tag { background: #25D366; color: white; }
+    .compare-supplier .amt { font-weight: 700; font-size: 1.05rem; }
+    .compare-supplier.winner .amt { color: #25D366; }
+    .compare-supplier.loser .amt { color: var(--gray-light); }
+
+    /* ─── OFFERS ─── */
+    .offers { background: var(--dark); color: var(--white); position: relative; overflow: hidden; }
+    .offers::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(224,0,0,0.1), transparent 60%),
+                  radial-gradient(ellipse at 80% 80%, rgba(255,184,111,0.08), transparent 50%);
+    }
+    .offers .section-label { color: var(--orange); }
+    .offers .section-title { color: var(--white); }
+    .offers .section-desc { color: rgba(255,255,255,0.6); }
+    .offer-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; position: relative; z-index: 1; }
+    .offer-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 2rem;
+      backdrop-filter: blur(8px);
+      transition: all 0.4s;
+    }
+    .offer-card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-4px);
+    }
+    .offer-card.featured {
+      background: linear-gradient(135deg, rgba(224,0,0,0.2), rgba(255,68,68,0.1));
+      border-color: rgba(224,0,0,0.4);
+    }
+    .offer-card-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.2rem;
+    }
+    .offer-card h3 {
+      font-family: var(--font-ui); font-size: 1.05rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .offer-card p {
+      font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.6);
+    }
+    .offer-card .price-tag {
+      display: inline-block; margin-top: 1rem;
+      font-family: var(--font-ui); font-weight: 700;
+      font-size: 1.4rem; color: var(--orange);
+    }
+    .offer-card .price-tag small {
+      font-size: 0.7rem; font-weight: 500; color: rgba(255,255,255,0.4);
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials { background: var(--cream); }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .testimonial {
+      background: var(--white); border-radius: 20px;
+      padding: 2rem; border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .testimonial:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
+    .testimonial-stars { color: var(--orange); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+    .testimonial p {
+      font-size: 1rem; line-height: 1.7; color: var(--dark);
+      font-style: italic; margin-bottom: 1.2rem;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .testimonial-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange-light), var(--orange));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-ui); font-weight: 700; font-size: 0.85rem;
+      color: var(--dark);
+    }
+    .testimonial-name {
+      font-family: var(--font-ui); font-size: 0.88rem; font-weight: 600; color: var(--dark);
+    }
+    .testimonial-loc {
+      font-family: var(--font-ui); font-size: 0.75rem; color: var(--gray-light);
+    }
+
+    /* ─── FAQ ─── */
+    .faq { background: var(--white); }
+    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 0;
+    }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; width: 100%; background: none; border: none;
+      font-family: var(--font-ui); font-size: 1rem; font-weight: 600;
+      color: var(--dark); text-align: left; padding: 0.4rem 0;
+      transition: color 0.25s;
+    }
+    .faq-q:hover { color: var(--red); }
+    .faq-q .icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--cream); display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: var(--red); flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .faq-item.open .faq-q .icon { transform: rotate(45deg); background: var(--red); color: white; }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding-top: 0.8rem; }
+    .faq-a p {
+      font-size: 0.95rem; line-height: 1.7; color: var(--gray);
+    }
+
+    /* ─── CTA BANNER ─── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--red), #FF3333);
+      padding: 5rem 1.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.05'%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-banner * { position: relative; z-index: 1; }
+    .cta-banner h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; color: var(--white);
+      margin-bottom: 1rem; letter-spacing: -0.02em;
+    }
+    .cta-banner p {
+      font-size: 1.1rem; color: rgba(255,255,255,0.85);
+      margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;
+    }
+    .btn-cta-big {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--white); color: var(--red);
+      padding: 1.1rem 2.5rem; border-radius: 60px;
+      font-family: var(--font-ui); font-size: 1.05rem; font-weight: 700;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .btn-cta-big:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,0.6);
+      padding: 4rem 1.5rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-brand .nav-logo { font-size: 1.8rem; margin-bottom: 1rem; display: inline-block; }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.7; max-width: 280px; }
+    .footer-col h4 {
+      font-family: var(--font-ui); font-size: 0.8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--white); margin-bottom: 1rem;
+    }
+    .footer-col a {
+      display: block; font-family: var(--font-ui); font-size: 0.88rem;
+      color: rgba(255,255,255,0.5); text-decoration: none;
+      margin-bottom: 0.6rem; transition: color 0.25s;
+    }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom {
+      max-width: 1100px; margin: 3rem auto 0;
+      padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--font-ui); font-size: 0.78rem;
+    }
+    .footer-socials { display: flex; gap: 1rem; }
+    .footer-socials a {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5); text-decoration: none;
+      font-size: 0.85rem; transition: all 0.25s;
+    }
+    .footer-socials a:hover { background: var(--red); color: white; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-burger { display: block; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-subtitle { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-visual { max-width: 420px; margin: 0 auto; }
+      .hero-float { display: none; }
+      .steps { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .benefits { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .offer-cards { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .testimonial-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 4rem 1.25rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .hero { padding: 6rem 1.25rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════ NAV ════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Mate<span>cha</span></a>
+    <div class="nav-links">
+      <a href="#how">Comment ça marche</a>
+      <a href="#why">Avantages</a>
+      <a href="#offers">Offres</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://wa.me/212XXXXXXXXX?text=Salam!%20Je%20veux%20commander%20mes%20courses%20avec%20Matecha" class="nav-cta">Commander →</a>
+    </div>
+    <button class="nav-burger" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section class="hero" id="hero">
+  <div class="hero-deco-1"></div>
+  <div class="hero-deco-2"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">Disponible à Fès</div>
+      <h1>Vos courses au <em>meilleur prix</em>, livrées chez&nbsp;vous</h1>
+      <p class="hero-subtitle">Envoyez votre liste sur WhatsApp. Matecha compare les prix entre tous les fournisseurs de Fès et vous livre en moins de 24h.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/212XXXXXXXXX?text=Salam!%20Je%20veux%20commander%20mes%20courses%20avec%20Matecha" class="btn-whatsapp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Commander sur WhatsApp
+        </a>
+        <a href="#how" class="btn-secondary">En savoir plus ↓</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-float hero-float-1">✓ Livraison &lt;24h</div>
+      <div class="hero-float hero-float-2">↓ −40% d'économies</div>
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="hero-card-icon">🛒</div>
+          <div>Comparaison en cours...</div>
+        </div>
+        <div class="price-row best">
+          <div class="store">🏪 Marché central <span class="badge-best">Meilleur prix</span></div>
+          <div class="price">5 dh/kg</div>
+        </div>
+        <div class="price-row other">
+          <div class="store">🏬 Marjane</div>
+          <div class="price">8 dh/kg</div>
+        </div>
+        <div class="price-row other">
+          <div class="store">🏪 Carrefour</div>
+          <div class="price">12 dh/kg</div>
+        </div>
+        <div class="price-row other">
+          <div class="store">🛒 Épicerie locale</div>
+          <div class="price">20 dh/kg</div>
+        </div>
+        <div class="savings-bar">
+          <div class="label">Économie sur les tomates</div>
+          <div class="amount">−15 dh</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ HOW IT WORKS ════ -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">Comment ça marche</div>
+      <h2 class="section-title reveal">Aussi simple que d'envoyer un message</h2>
+      <p class="section-desc reveal">Pas d'application à installer. Pas de compte à créer. Tout passe par WhatsApp, l'application que vous utilisez déjà chaque jour.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-icon">📱</div>
+        <h3>Envoyez votre liste</h3>
+        <p>Écrivez votre liste de courses sur WhatsApp, tout simplement. Tomates, huile, poulet... ce que vous voulez.</p>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <div class="step-icon">⚡</div>
+        <h3>On compare les prix</h3>
+        <p>Matecha scanne les prix chez Marjane, Carrefour, les marchés et les épiceries de Fès pour trouver le meilleur tarif.</p>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <div class="step-icon">🚗</div>
+        <h3>Livré chez vous</h3>
+        <p>Un livreur Matecha collecte vos produits et vous les livre à domicile en moins de 24 heures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ WHY MATECHA ════ -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">Pourquoi Matecha</div>
+      <h2 class="section-title reveal">Faites vos courses<br>sans le stress des prix</h2>
+      <p class="section-desc reveal">Plus besoin de courir entre les magasins pour comparer. On le fait pour vous, automatiquement.</p>
+    </div>
+    <div class="benefits">
+      <div class="benefit reveal">
+        <div class="benefit-icon eco">💰</div>
+        <h3>Économies réelles</h3>
+        <p>Nos clients économisent en moyenne 30 à 40% sur leurs courses en accédant aux meilleurs prix de chaque fournisseur.</p>
+      </div>
+      <div class="benefit reveal reveal-delay-1">
+        <div class="benefit-icon time">⏰</div>
+        <h3>Gain de temps</h3>
+        <p>Plus besoin de vous déplacer entre le souk, Marjane et Carrefour. Un message WhatsApp suffit pour tout commander.</p>
+      </div>
+      <div class="benefit reveal reveal-delay-2">
+        <div class="benefit-icon simple">📲</div>
+        <h3>Zéro complication</h3>
+        <p>Pas d'application à télécharger. Pas de compte. Vous commandez sur WhatsApp, l'app que vous utilisez déjà tous les jours.</p>
+      </div>
+      <div class="benefit reveal reveal-delay-3">
+        <div class="benefit-icon trust">👁️</div>
+        <h3>Transparence totale</h3>
+        <p>Voyez les prix de chaque fournisseur. Vous choisissez en connaissance de cause, sans surprise à la livraison.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ COMPARATEUR ════ -->
+<section class="compare" id="compare">
+  <div class="container">
+    <div class="compare-grid">
+      <div class="compare-text">
+        <div class="section-label reveal">Le comparateur</div>
+        <h2 class="section-title reveal">Chaque produit au<br>meilleur prix de Fès</h2>
+        <p class="section-desc reveal">Matecha interroge tous les fournisseurs en temps réel et attribue chaque produit de votre liste au fournisseur le moins cher. Vous voyez la différence, on gère le reste.</p>
+        <div class="reveal" style="margin-top:1.5rem">
+          <a href="https://wa.me/212XXXXXXXXX?text=Salam!%20Je%20veux%20essayer%20Matecha" class="btn-whatsapp" style="font-size:0.9rem; padding:0.85rem 1.6rem;">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Essayer maintenant
+          </a>
+        </div>
+      </div>
+      <div class="compare-demo reveal">
+        <div class="compare-product">
+          <div class="compare-product-img">🍅</div>
+          <div>
+            <div class="compare-product-name">Tomates rondes</div>
+            <div class="compare-product-cat">Fruits & Légumes · 1 kg</div>
+          </div>
+        </div>
+        <div class="compare-supplier winner">
+          <div class="name">Marché central <span class="tag">Meilleur prix</span></div>
+          <div class="amt">5 dh</div>
+        </div>
+        <div class="compare-supplier loser">
+          <div class="name">Marjane</div>
+          <div class="amt">8 dh</div>
+        </div>
+        <div class="compare-supplier loser">
+          <div class="name">Carrefour</div>
+          <div class="amt">12 dh</div>
+        </div>
+        <div class="compare-supplier loser">
+          <div class="name">Épicerie du quartier</div>
+          <div class="amt">20 dh</div>
+        </div>
+        <div style="margin-top:1rem; padding:0.6rem; text-align:center; font-family:var(--font-ui); font-size:0.78rem; color:var(--gray-light); background:var(--white); border-radius:10px;">
+          Prix mis à jour quotidiennement · Sources vérifiées
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ OFFERS ════ -->
+<section class="offers" id="offers">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">Nos offres</div>
+      <h2 class="section-title reveal">Des formules pensées<br>pour votre budget</h2>
+      <p class="section-desc reveal">Que vous commandiez une fois ou chaque semaine, on a une formule qui vous convient.</p>
+    </div>
+    <div class="offer-cards">
+      <div class="offer-card reveal">
+        <div class="offer-card-icon">🚚</div>
+        <h3>Abonnement livraison</h3>
+        <p>Livraisons illimitées pendant tout le mois. Plus besoin de calculer les frais de livraison.</p>
+        <div class="price-tag">9,99 dh<small> /mois</small></div>
+      </div>
+      <div class="offer-card featured reveal reveal-delay-1">
+        <div class="offer-card-icon">⭐</div>
+        <h3>Programme fidélité</h3>
+        <p>5% de réduction dès votre 3ème commande. 10% à partir de la 5ème. Ça récompense la régularité.</p>
+        <div class="price-tag">Jusqu'à −10%</div>
+      </div>
+      <div class="offer-card reveal reveal-delay-2">
+        <div class="offer-card-icon">👥</div>
+        <h3>Commande groupée</h3>
+        <p>Commandez avec vos voisins et bénéficiez de réductions supplémentaires sur la livraison et les produits.</p>
+        <div class="price-tag">Réductions extra</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ TESTIMONIALS ════ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">Témoignages</div>
+      <h2 class="section-title reveal">Ils ont essayé Matecha</h2>
+      <p class="section-desc reveal">Ce que disent nos premiers utilisateurs à Fès.</p>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>«&nbsp;Je ne savais pas que les tomates au marché coûtaient 4 fois moins cher qu'à l'épicerie. Matecha m'a ouvert les yeux et le portefeuille&nbsp;!&nbsp;»</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">F</div>
+          <div>
+            <div class="testimonial-name">Fatima B.</div>
+            <div class="testimonial-loc">Fès, Saïss</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial reveal reveal-delay-1">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>«&nbsp;En tant que mère de 3 enfants, je n'ai plus le temps de faire le tour des magasins. Avec Matecha, j'envoie ma liste et c'est réglé.&nbsp;»</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">K</div>
+          <div>
+            <div class="testimonial-name">Khadija M.</div>
+            <div class="testimonial-loc">Fès, Narjiss</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial reveal reveal-delay-2">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>«&nbsp;Je gère un petit restaurant et Matecha me fait gagner du temps et de l'argent chaque semaine sur mes achats en gros.&nbsp;»</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">Y</div>
+          <div>
+            <div class="testimonial-name">Youssef A.</div>
+            <div class="testimonial-loc">Fès, Médina</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FAQ ════ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">Questions fréquentes</div>
+      <h2 class="section-title reveal">Tout ce que vous<br>devez savoir</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Quelles zones de Fès sont couvertes ?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><p>Nous couvrons actuellement les principaux quartiers de Fès : Saïss, Narjiss, Agdal, Route d'Imouzzer et la Ville Nouvelle. Nous étendons progressivement notre zone de livraison.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Quels sont les délais de livraison ?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><p>Vos courses sont livrées en moins de 24 heures. Les commandes passées avant 20h sont généralement livrées le lendemain matin.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Comment se fait le paiement ?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><p>Le paiement se fait à la livraison en espèces. Nous travaillons sur l'intégration de paiements mobiles pour bientôt.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Est-ce que je peux choisir mon fournisseur ?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><p>Oui ! Matecha vous montre les prix de chaque fournisseur. Par défaut, on sélectionne le moins cher, mais vous pouvez choisir un autre fournisseur si vous le préférez.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Dois-je télécharger une application ?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><p>Non, aucune application à télécharger ! Tout fonctionne via WhatsApp. Vous envoyez votre liste et on s'occupe du reste.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Comment sont vérifiés les prix ?
+          <span class="icon">+</span>
+        </button>
+        <div class="faq-a"><p>Nos prix sont mis à jour quotidiennement via nos partenaires fournisseurs. Nous vérifions les tarifs en temps réel pour garantir la fiabilité des comparaisons.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA BANNER ════ -->
+<section class="cta-banner">
+  <h2 class="reveal">Prêt à faire des économies<br>sur vos courses ?</h2>
+  <p class="reveal">Envoyez votre première liste sur WhatsApp.<br>C'est gratuit, simple et rapide.</p>
+  <a href="https://wa.me/212XXXXXXXXX?text=Salam!%20Je%20veux%20commander%20mes%20courses%20avec%20Matecha" class="btn-cta-big reveal">
+    <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Commander sur WhatsApp
+  </a>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Mate<span>cha</span></a>
+      <p>Le comparateur de prix alimentaires de Fès. Comparez, commandez, faites-vous livrer.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <a href="#how">Comment ça marche</a>
+      <a href="#why">Avantages</a>
+      <a href="#offers">Offres</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="https://wa.me/212XXXXXXXXX">WhatsApp</a>
+      <a href="mailto:contact@matecha.ma">contact@matecha.ma</a>
+      <a href="#">Fès, Maroc</a>
+    </div>
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <a href="#">Mentions légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">CGU</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Matecha. Tous droits réservés.</span>
+    <div class="footer-socials">
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="Facebook">FB</a>
+      <a href="#" aria-label="TikTok">TK</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+  // Navbar scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Mobile nav
+  const style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 900px) {
+      .nav-links.show {
+        display: flex !important; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(255,255,255,0.98); backdrop-filter: blur(16px);
+        padding: 1.5rem; gap: 1rem;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        animation: fadeIn 0.3s ease;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+
+</body>
+</html>
