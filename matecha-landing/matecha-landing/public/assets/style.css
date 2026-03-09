@@ -363,6 +363,17 @@ section { padding: var(--section-py) 0; }
 .compare { background: var(--white); }
 .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
 .compare-text .section-desc { margin-bottom: 1.3rem; }
+.compare-controls { margin-bottom: 1.1rem; }
+.compare-label {
+  display: block; font-family: var(--font-ui); font-size: 0.8rem;
+  font-weight: 600; color: var(--dark); margin-bottom: 0.5rem;
+}
+.compare-actions-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.compare-select {
+  flex: 1 1 260px; background: var(--white); color: var(--dark);
+  border: 1px solid var(--border); border-radius: 999px; padding: 0.75rem 0.95rem;
+  font-family: var(--font-ui); font-size: 0.86rem;
+}
 .compare-demo {
   background: var(--cream); border-radius: var(--radius-lg);
   padding: 1.8rem; border: 1px solid var(--border);
@@ -400,6 +411,12 @@ section { padding: var(--section-py) 0; }
   font-family: var(--font-ui); font-size: 0.75rem; color: var(--gray-light);
   background: var(--white); border-radius: var(--radius-sm);
 }
+.compare-economy {
+  margin-top: 0.7rem; padding: 0.75rem 0.9rem; border-radius: 12px;
+  background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.2);
+  font-family: var(--font-ui); font-size: 0.82rem; color: var(--dark);
+}
+.compare-economy strong { color: var(--green-dark); }
 
 /* ═══════════════════════════════════════════
    OFFERS / PRICING
@@ -707,6 +724,7 @@ footer {
   .steps { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
   .benefits { grid-template-columns: 1fr; }
   .compare-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .compare-actions-row .btn-red { width: 100%; justify-content: center; }
   .offer-cards { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
   .testimonial-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
