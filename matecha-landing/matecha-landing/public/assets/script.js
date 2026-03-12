@@ -28,6 +28,13 @@
   const navLinks = document.getElementById('navLinks');
 
   if (burger && navLinks) {
+    const closeNav = () => {
+      navLinks.classList.remove('show');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Ouvrir le menu');
+    };
+
     burger.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('show');
       burger.classList.toggle('open');
@@ -37,29 +44,20 @@
 
     // Close on link click
     navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('show');
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        burger.setAttribute('aria-label', 'Ouvrir le menu');
-      });
+      link.addEventListener('click', closeNav);
     });
 
     // Close on outside click
     document.addEventListener('click', (e) => {
       if (nav && !nav.contains(e.target) && navLinks.classList.contains('show')) {
-        navLinks.classList.remove('show');
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
+        closeNav();
       }
     });
 
     // Close on Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && navLinks.classList.contains('show')) {
-        navLinks.classList.remove('show');
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
+        closeNav();
         burger.focus();
       }
     });
@@ -90,6 +88,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
@@ -123,13 +122,14 @@
   }
 
   // ─── FAQ ACCORDION ───
+  const faqItems = document.querySelectorAll('.faq-item');
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
       if (!item) return;
       const wasOpen = item.classList.contains('open');
       // Close all other items
-      document.querySelectorAll('.faq-item.open').forEach(openItem => {
+      faqItems.forEach(openItem => {
         openItem.classList.remove('open');
         const openBtn = openItem.querySelector('.faq-q');
         if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
@@ -233,9 +233,8 @@
     if (!item || !compareResults) return;
 
     const ranked = [...item.offers].sort((a, b) => a.price - b.price);
-    const matecha = ranked[0];
     const mostExpensive = ranked[ranked.length - 1];
-    const economy = mostExpensive.price - matecha.price;
+    const economy = mostExpensive.price - ranked[0].price;
 
     if (compareProductHeader) {
       const emojiEl = compareProductHeader.querySelector('.compare-product-img');
@@ -267,12 +266,9 @@
     )).join('');
 
     renderComparison(compareData[0].id);
-    compareBtn.addEventListener('click', () => {
-      renderComparison(productSelect.value);
-    });
-    productSelect.addEventListener('change', () => {
-      renderComparison(productSelect.value);
-    });
+    const handleCompare = () => renderComparison(productSelect.value);
+    compareBtn.addEventListener('click', handleCompare);
+    productSelect.addEventListener('change', handleCompare);
   }
 
   // ─── PARTNER FORM (simple validation) ───
