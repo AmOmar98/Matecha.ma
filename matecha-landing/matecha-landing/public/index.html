@@ -19,6 +19,7 @@
   <meta name="twitter:description" content="Comparez les prix, commandez sur WhatsApp, livré chez vous à Fès.">
 
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/waitlist.css">
 </head>
 <body>
 
@@ -253,6 +254,47 @@
   </div>
 </section>
 
+<!-- ════ CANAL + WAITLIST ════ -->
+<section class="canal-section" id="canal">
+  <div class="container">
+    <div class="canal-card reveal">
+      <div class="offer-badge">Offre de lancement</div>
+      <h2>Rejoignez le Canal Matecha et recevez <em>−20 dh</em> sur votre 1ère commande</h2>
+      <p>Les meilleures offres de Fès, chaque semaine sur WhatsApp. Sans spam, désinscription en un clic.</p>
+
+      <form class="waitlist-form" id="waitlist-form" novalidate>
+        <div>
+          <label for="wa-number">Numéro WhatsApp *</label>
+          <input id="wa-number" name="whatsapp_number" type="tel" inputmode="tel" placeholder="0675742868" required>
+        </div>
+        <div>
+          <label for="wa-email">Email (optionnel)</label>
+          <input id="wa-email" name="email" type="email" placeholder="vous@exemple.ma">
+        </div>
+        <label class="consent">
+          <input id="wa-canal" type="checkbox" checked>
+          <span>Je souhaite rejoindre le Canal WhatsApp Matecha (offres hebdomadaires).</span>
+        </label>
+        <label class="consent">
+          <input id="wa-consent" type="checkbox" required>
+          <span>J'accepte la <a href="politique-confidentialite.html" target="_blank">politique de confidentialité</a> (CNDP). *</span>
+        </label>
+        <div class="waitlist-error" id="waitlist-error" role="alert"></div>
+        <button type="submit">Réserver ma place</button>
+        <div class="waitlist-count" id="waitlist-count"></div>
+      </form>
+
+      <div class="waitlist-success" id="waitlist-success" style="display:none;">
+        <h3>Bienvenue chez Matecha 🎉</h3>
+        <p>Votre code d'offre :</p>
+        <div class="code">—</div>
+        <p style="margin-top:1rem;font-size:.9rem;color:#666;">Gardez ce code, il sera appliqué automatiquement à votre 1ère commande WhatsApp.</p>
+        <a class="canal-cta btn-wa" style="display:none;margin-top:1rem;" target="_blank">Rejoindre le Canal WhatsApp →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ════ TESTIMONIALS ════ -->
 <section class="testimonials" id="testimonials">
   <div class="container">
@@ -436,5 +478,6 @@
 </footer>
 
 <script src="assets/script.js"></script>
+<script src="assets/waitlist.js" defer></script>
 </body>
 </html>
