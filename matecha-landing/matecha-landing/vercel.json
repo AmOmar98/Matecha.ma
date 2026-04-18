@@ -1,4 +1,18 @@
 {
-  "buildCommand": null,
-  "outputDirectory": "public"
+  "version": 2,
+  "public": true,
+  "buildCommand": "npm run build:data || true",
+  "functions": {
+    "api/leads.js": { "runtime": "nodejs20.x", "maxDuration": 10 },
+    "api/leads-count.js": { "runtime": "nodejs20.x", "maxDuration": 5 }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
 }
