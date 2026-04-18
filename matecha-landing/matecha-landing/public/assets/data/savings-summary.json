@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-04-18T22:53:30.337Z",
+  "source_counts": {
+    "carrefour": 8674,
+    "marjane": 25471,
+    "mymarket": 5757
+  },
+  "categories": [
+    {
+      "slug": "animalerie",
+      "label": "Animalerie",
+      "savings_min_pct": 28,
+      "savings_max_pct": 28,
+      "sample_comparable_products": 1
+    },
+    {
+      "slug": "epicerie",
+      "label": "Épicerie",
+      "savings_min_pct": 6,
+      "savings_max_pct": 112,
+      "sample_comparable_products": 22
+    },
+    {
+      "slug": "laitiers",
+      "label": "Produits laitiers",
+      "savings_min_pct": 6,
+      "savings_max_pct": 69,
+      "sample_comparable_products": 16
+    }
+  ]
+}
