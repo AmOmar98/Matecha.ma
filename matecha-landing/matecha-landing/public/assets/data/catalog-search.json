@@ -1,0 +1,318 @@
+{
+  "products": [
+    {
+      "id": "laitiers-breton-beurre-demi-sel-au-sel-de-mer-avec-cristaux-en-plaquette-250g-pa",
+      "name": "Beurre Demi-sel Au Sel De Mer Avec Cristaux En Plaquette 250g - Paysan Breton",
+      "brand": "Breton",
+      "category": "laitiers",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 1.95,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 7.95,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=713113"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 1.95,
+      "worst_price_mad": 7.95,
+      "savings_pct": 75
+    },
+    {
+      "id": "animalerie-activpet-intermarche-croquettes-chien-sans-cereale-au-b-uf-2-7kg-cana",
+      "name": "Intermarche - Croquettes Chien Sans Cereale Au B Uf 2.7kg - Canaillou",
+      "brand": "Activpet",
+      "category": "animalerie",
+      "suppliers": [
+        {
+          "supplier": "carrefour",
+          "price_mad": 2.5,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=716817"
+        },
+        {
+          "supplier": "marjane",
+          "price_mad": 7.9,
+          "url": ""
+        }
+      ],
+      "best_supplier": "carrefour",
+      "best_price_mad": 2.5,
+      "worst_price_mad": 7.9,
+      "savings_pct": 68
+    },
+    {
+      "id": "epicerie-amanhecer-yaourt-brasse-aromatise-a-la-vanille-les-plaisirs-de-chergui",
+      "name": "Yaourt Brasse Aromatise A La Vanille Les Plaisirs De Chergui 2x125g - Chergui",
+      "brand": "Amanhecer",
+      "category": "epicerie",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 0.95,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 2.4,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=6793"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 0.95,
+      "worst_price_mad": 2.4,
+      "savings_pct": 60
+    },
+    {
+      "id": "epicerie-carrefour-intermarche-biscuits-b-uf-cereales-calcium-pour-chien-500g-ca",
+      "name": "Intermarche - Biscuits B Uf-cereales-calcium Pour Chien 500g - Canaillou",
+      "brand": "Carrefour",
+      "category": "epicerie",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 14.95,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 26.95,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=553173"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 14.95,
+      "worst_price_mad": 26.95,
+      "savings_pct": 45
+    },
+    {
+      "id": "boissons-sugar-lait-aromatise-cafe-caramel-fruits-secs-vanille-p-tit-dej-320g-ja",
+      "name": "Lait Aromatise Cafe Caramel Fruits Secs Vanille P Tit Dej 320g - Jaouda",
+      "brand": "Sugar",
+      "category": "boissons",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 3.95,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 6.95,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=29657"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 3.95,
+      "worst_price_mad": 6.95,
+      "savings_pct": 43
+    },
+    {
+      "id": "epicerie-feuilles-2-paquets-de-spaghetti-x500g-1-paquet-de-spaghetti-500g-offert",
+      "name": "2 Paquets De Spaghetti X500g 1 Paquet De Spaghetti 500g Offert - Monte Regal",
+      "brand": "feuilles",
+      "category": "epicerie",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 1.95,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 3.25,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=662751"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 1.95,
+      "worst_price_mad": 3.25,
+      "savings_pct": 40
+    },
+    {
+      "id": "animalerie-felix-sel-de-table-raffine-seche-fin-iode-glace-1kg-sel-de-beros",
+      "name": "Sel De Table Raffine Seche Fin Iode Glace 1kg - Sel De Beros",
+      "brand": "Felix",
+      "category": "animalerie",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 2.35,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 3.2,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=694477"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 2.35,
+      "worst_price_mad": 3.2,
+      "savings_pct": 27
+    },
+    {
+      "id": "animalerie-felix-filets-d-anchois-roules-aux-capres-a-l-huille-equilibre-100g-la",
+      "name": "Filets D Anchois Roules Aux Capres A L Huille Equilibre 100g - La Monegasque",
+      "brand": "Felix",
+      "category": "animalerie",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 6.5,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 8.75,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=594483"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 6.5,
+      "worst_price_mad": 8.75,
+      "savings_pct": 26
+    },
+    {
+      "id": "boissons-teisseire-intermarche-boisson-infusion-de-the-vert-parfum-menthe-en-pet",
+      "name": "Intermarche - Boisson Infusion De The Vert Parfum Menthe En Pet 1l - Cotterley",
+      "brand": "Teisseire",
+      "category": "boissons",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 3.95,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 4.95,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=642988"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 3.95,
+      "worst_price_mad": 4.95,
+      "savings_pct": 20
+    },
+    {
+      "id": "boissons-glass-boisson-au-lait-et-au-concentre-de-jus-de-fruit-peche-et-abricot",
+      "name": "Boisson Au Lait Et Au Concentre De Jus De Fruit Peche Et Abricot 240ml - Danao",
+      "brand": "Glass",
+      "category": "boissons",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 2,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 2.45,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=552763"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 2,
+      "worst_price_mad": 2.45,
+      "savings_pct": 18
+    },
+    {
+      "id": "epicerie-kotlin-mayonnaise-37cl-moutarde-au-miel-21cl-ketchup-190g-offert-star",
+      "name": "Mayonnaise 37cl Moutarde Au Miel 21cl Ketchup 190g Offert - Star",
+      "brand": "kotlin",
+      "category": "epicerie",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 10.95,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 12.5,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=441089"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 10.95,
+      "worst_price_mad": 12.5,
+      "savings_pct": 12
+    },
+    {
+      "id": "epicerie-star-intermarche-mayonnaise-a-la-moutarde-a-l-ancienne-235g-bouton-d-or",
+      "name": "Intermarche - Mayonnaise A La Moutarde A L Ancienne 235g Bouton D Or",
+      "brand": "Star",
+      "category": "epicerie",
+      "suppliers": [
+        {
+          "supplier": "marjane",
+          "price_mad": 6.8,
+          "url": ""
+        },
+        {
+          "supplier": "carrefour",
+          "price_mad": 7.5,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=489756"
+        }
+      ],
+      "best_supplier": "marjane",
+      "best_price_mad": 6.8,
+      "worst_price_mad": 7.5,
+      "savings_pct": 9
+    },
+    {
+      "id": "animalerie-fromage-nouilles-piquantes-au-poulet-et-aux-quatres-fromages-145g-sam",
+      "name": "Nouilles Piquantes Au Poulet Et Aux Quatres Fromages 145g - Samyang",
+      "brand": "Fromage",
+      "category": "animalerie",
+      "suppliers": [
+        {
+          "supplier": "carrefour",
+          "price_mad": 1.5,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=656242"
+        },
+        {
+          "supplier": "marjane",
+          "price_mad": 1.5,
+          "url": ""
+        }
+      ],
+      "best_supplier": "carrefour",
+      "best_price_mad": 1.5,
+      "worst_price_mad": 1.5,
+      "savings_pct": 0
+    },
+    {
+      "id": "epicerie-isabel-thon-concentre-de-tomate-37cl-sauce-pizza-37cl-coulis-de-tomate",
+      "name": "Concentre De Tomate 37cl Sauce Pizza 37cl Coulis De Tomate 37cl - Aicha",
+      "brand": "ISABEL THON",
+      "category": "epicerie",
+      "suppliers": [
+        {
+          "supplier": "carrefour",
+          "price_mad": 2.5,
+          "url": "https://glovoapp.com/en/ma/fes/stores/carrefour-market-fes-global?productId=728142"
+        },
+        {
+          "supplier": "marjane",
+          "price_mad": 2.5,
+          "url": ""
+        }
+      ],
+      "best_supplier": "carrefour",
+      "best_price_mad": 2.5,
+      "worst_price_mad": 2.5,
+      "savings_pct": 0
+    }
+  ],
+  "generated_at": "2026-04-18T23:07:22.161Z",
+  "source_counts": {
+    "carrefour": 8674,
+    "mymarket": 5757,
+    "marjane": 25471
+  }
+}

@@ -6,7 +6,9 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "build:data": "node scripts/build-savings-summary.mjs"
+    "build:data": "node scripts/build-savings-summary.mjs",
+    "build:catalog": "node scripts/build-catalog-search.mjs",
+    "build:all": "npm run build:data && npm run build:catalog"
   },
   "devDependencies": {
     "vitest": "^1.6.0"
