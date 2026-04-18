@@ -43,3 +43,9 @@
   .canal-card { padding: 1.8rem 1.2rem; }
   .canal-card h2 { font-size: 1.4rem; }
 }
+.savings-proof { padding: 3rem 1rem; background: #fff; }
+.savings-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 1rem; margin-top: 1.5rem; max-width: 960px; margin-left: auto; margin-right: auto; }
+.savings-tile { background: #fff; padding: 1.2rem; border-radius: 12px; border: 1px solid #eee; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,.04); }
+.savings-tile .pct { font-size: 1.6rem; font-weight: 800; color: #E00000; }
+.savings-tile .cat { font-size: .9rem; color: #333; margin-top: .3rem; }
+.savings-tile .n { font-size: .75rem; color: #999; margin-top: .2rem; }

@@ -77,3 +77,27 @@
     }
   });
 })();
+
+(async function renderSavings() {
+  const grid = document.getElementById('savings-grid');
+  const src = document.getElementById('savings-source');
+  const dateEl = document.getElementById('savings-date');
+  if (!grid) return;
+  try {
+    const r = await fetch('/assets/data/savings-summary.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error('fetch failed');
+    const data = await r.json();
+    grid.innerHTML = data.categories.map(c => `
+      <div class="savings-tile">
+        <div class="pct">${c.savings_min_pct}–${c.savings_max_pct}%</div>
+        <div class="cat">${c.label}</div>
+        <div class="n">${c.sample_comparable_products} produits comparés</div>
+      </div>
+    `).join('');
+    const total = Object.values(data.source_counts || {}).reduce((s, n) => s + n, 0);
+    if (src && total > 0) src.textContent = `${total.toLocaleString('fr-FR')} produits analysés`;
+    if (dateEl) dateEl.textContent = `mis à jour le ${new Date(data.generated_at).toLocaleDateString('fr-FR')}`;
+  } catch {
+    document.getElementById('savings-proof')?.remove();
+  }
+})();
