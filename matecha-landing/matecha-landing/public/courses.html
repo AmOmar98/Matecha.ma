@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Construisez votre liste de courses — Matecha</title>
+  <meta name="description" content="Recherchez des produits, voyez le supermarché le moins cher pour chacun, et envoyez votre liste finale sur WhatsApp pour commander.">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/courses.css">
+</head>
+<body class="courses-page">
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Mate<span>cha</span></a>
+    <div class="nav-links">
+      <a href="/">Accueil</a>
+      <a href="/courses.html" aria-current="page">Construire ma liste</a>
+      <a href="/#canal">Canal</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<header class="courses-header">
+  <div class="container">
+    <h1>Construisez votre liste, <em>on trouve les meilleurs prix</em></h1>
+    <p>Comparez 3 supermarchés à Fès : Marjane · Carrefour · MyMarket. Cliquez un produit pour voir les détails.</p>
+    <div class="courses-disclaimer" role="note">
+      Prix indicatifs <span id="catalog-date">—</span>. Le prix final est confirmé à la commande WhatsApp.
+    </div>
+  </div>
+</header>
+
+<main class="courses-main container">
+  <aside class="filters">
+    <div class="search-box">
+      <label for="q" class="sr-only">Rechercher</label>
+      <input id="q" type="search" placeholder="Rechercher un produit (ex: tomates, huile)…" autocomplete="off">
+    </div>
+    <div class="categories" role="tablist" aria-label="Catégories">
+      <button class="cat-chip is-active" data-cat="all" role="tab" aria-selected="true">Tout</button>
+      <button class="cat-chip" data-cat="epicerie" role="tab">Épicerie</button>
+      <button class="cat-chip" data-cat="boissons" role="tab">Boissons</button>
+      <button class="cat-chip" data-cat="laitiers" role="tab">Laitiers</button>
+      <button class="cat-chip" data-cat="fruits_legumes" role="tab">Fruits & Légumes</button>
+      <button class="cat-chip" data-cat="animalerie" role="tab">Animalerie</button>
+    </div>
+    <div class="result-count" id="result-count" aria-live="polite"></div>
+  </aside>
+
+  <section class="product-grid" id="product-grid" aria-label="Produits">
+    <div class="loading">Chargement du catalogue…</div>
+  </section>
+</main>
+
+<aside class="cart-panel" id="cart-panel" aria-label="Ma liste de courses">
+  <header class="cart-header">
+    <h2>Ma liste <span class="cart-count" id="cart-count">0</span></h2>
+    <button class="cart-close" id="cart-close" aria-label="Fermer la liste">×</button>
+  </header>
+  <div class="cart-items" id="cart-items">
+    <p class="cart-empty">Votre liste est vide. Cliquez sur « Ajouter » sous un produit.</p>
+  </div>
+  <footer class="cart-footer">
+    <div class="cart-totals">
+      <div><span>Total estimé</span><strong id="cart-total">0 dh</strong></div>
+      <div class="savings"><span>Économie vs pire prix</span><strong id="cart-savings">0 dh</strong></div>
+    </div>
+    <button class="btn-wa btn-wa--lg" id="send-wa" disabled>Envoyer sur WhatsApp →</button>
+  </footer>
+</aside>
+
+<button class="cart-fab" id="cart-fab" aria-label="Ouvrir ma liste">
+  🛒 <span class="cart-fab-count" id="cart-fab-count">0</span>
+</button>
+
+<div class="overlay" id="overlay" hidden aria-hidden="true">
+  <div class="overlay-backdrop" id="overlay-backdrop" tabindex="-1"></div>
+  <div class="overlay-dialog" role="dialog" aria-modal="true" aria-labelledby="ov-title" id="overlay-dialog">
+    <button class="overlay-close" id="overlay-close" aria-label="Fermer">×</button>
+    <div class="overlay-body" id="overlay-body"></div>
+  </div>
+</div>
+
+<script src="assets/courses.js" type="module"></script>
+</body>
+</html>
