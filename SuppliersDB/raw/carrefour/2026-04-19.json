@@ -1,0 +1,14 @@
+[
+  {
+    "_meta": {
+      "total_products": 0,
+      "categories_covered": [],
+      "duration_seconds": 120,
+      "errors_count": 1,
+      "source_url": "https://www.carrefour.ma",
+      "scraped_at": "2026-04-19T22:24:30Z",
+      "supplier": "carrefour",
+      "error_note": "Site blocked: Cloudflare WAF returned 403 Forbidden with x-deny-reason: resolve_no_records on all requests (robots.txt, homepage, category pages, API endpoints). DNS resolves carrefour.ma to Cloudflare IPs 104.18.3.39 and 104.18.2.39, but Cloudflare rejects requests originating from this environment because it classifies the egress IP as a private/reserved address range. The www.carrefour.ma subdomain additionally fails DNS resolution entirely from this host (socket.gaierror: [Errno -5] No address associated with hostname). No product data could be retrieved. robots.txt could not be fetched due to the same 403 block. Recommended action: run the scraper from a public-IP host (e.g. a cloud VM with a routable public IPv4), or use a residential proxy service to bypass Cloudflare Bot Management."
+    }
+  }
+]

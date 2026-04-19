@@ -1,0 +1,14 @@
+[
+  {
+    "_meta": {
+      "total_products": 0,
+      "categories_covered": [],
+      "duration_seconds": 60,
+      "errors_count": 14,
+      "source_url": "https://www.marjane.ma",
+      "scraped_at": "2026-04-19T00:00:00Z",
+      "supplier": "marjane",
+      "error_note": "All HTTP requests to www.marjane.ma returned HTTP 403 Forbidden. Attempted URLs: /, /robots.txt, /sitemap.xml, /catalogue, /epicerie, /fr/alimentaire, /shop, /produits, /groceries, /api/catalog, /marjane-market, /en. The site appears to block requests from datacenter/cloud IP ranges or enforces browser-fingerprint validation (JavaScript challenge / Cloudflare-style protection) that the WebFetch tool cannot satisfy. No product data could be retrieved. Recommend retry from a residential IP with a real browser-based scraper (Playwright/Puppeteer) or check whether Marjane provides a public API or data feed."
+    }
+  }
+]

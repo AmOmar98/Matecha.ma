@@ -1,0 +1,3 @@
+[
+  {"_meta": {"total_products": 0, "categories_covered": [], "duration_seconds": 654, "errors_count": 1, "source_url": "https://food.jumia.ma", "error": "Scraper agent stream idle timeout — partial response received; no product data collected. Retry from residential/non-datacenter IP with browser automation."}}
+]
