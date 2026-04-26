@@ -1,0 +1,14 @@
+[
+  {
+    "_meta": {
+      "total_products": 0,
+      "categories_covered": [],
+      "duration_seconds": 757,
+      "errors_count": 1,
+      "source_url": "https://food.jumia.ma",
+      "supplier": "jumia",
+      "scraped_at": "2026-04-26T00:00:00Z",
+      "error": "Stream idle timeout — agent timed out before writing any products. food.jumia.ma likely requires headless browser or returned no parseable catalog pages within the time limit."
+    }
+  }
+]
