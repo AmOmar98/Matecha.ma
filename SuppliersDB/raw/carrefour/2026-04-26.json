@@ -1,0 +1,25 @@
+[
+  {
+    "_meta": {
+      "total_products": 0,
+      "categories_covered": [],
+      "duration_seconds": 0,
+      "errors_count": 12,
+      "source_url": "https://www.carrefour.ma",
+      "scraped_at": "2026-04-26T00:00:00Z",
+      "supplier": "carrefour",
+      "status": "BLOCKED",
+      "blocking_details": {
+        "www.carrefour.ma": "ECONNREFUSED — TCP connection refused on all www.carrefour.ma paths (/, /robots.txt, /sitemap.xml, /fr/epicerie, /fr/boissons, /fr/c/epicerie)",
+        "carrefour.ma": "HTTP 403 Forbidden on /robots.txt, /fr/c/epicerie, /fr/c/boissons, /fr/alimentaire, /api/v1/products; HTTP 503 Service Unavailable on /, /sitemap.xml, /fr/epicerie, /fr/boissons",
+        "summary": "The site is protected by a WAF / bot-detection layer. No HTML product data was returned on any attempted URL. robots.txt itself returns 403, making compliance verification impossible. Scraping cannot proceed without a residential proxy or browser automation (Playwright/Puppeteer with stealth) that the current WebFetch tool does not support."
+      },
+      "recommended_next_steps": [
+        "Use a headless browser with stealth plugin (e.g. playwright-extra + puppeteer-stealth) running from a residential IP.",
+        "Alternatively, contact Carrefour Maroc for an official product feed / data partnership.",
+        "Check if Carrefour Maroc exposes a public API or data export (e.g. Google Merchant feed at /feed.xml or /feed/google).",
+        "Try fetching via a cached version (Google Cache, Common Crawl) for historical price data."
+      ]
+    }
+  }
+]
