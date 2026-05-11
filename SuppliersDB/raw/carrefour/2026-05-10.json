@@ -1,0 +1,46 @@
+[
+  {
+    "_meta": {
+      "total_products": 0,
+      "categories_covered": [],
+      "duration_seconds": 147,
+      "errors_count": 14,
+      "source_url": "https://www.carrefour.ma",
+      "scraped_at": "2026-05-10T00:00:00Z",
+      "supplier": "carrefour",
+      "status": "BLOCKED",
+      "blocking_details": {
+        "www.carrefour.ma": "DNS resolution failure — hostname does not resolve from the scraping environment (socket.gaierror: No address associated with hostname). Confirmed that general internet connectivity is intact (google.com resolves normally). This is geo-DNS or network-level blocking.",
+        "carrefour.ma (bare domain)": "Resolves to Cloudflare IP 104.18.2.39 but returns 'Attention Required! | Cloudflare — Sorry, you have been blocked' on every path: /, /robots.txt, /sitemap.xml, /fr/c/epicerie, /fr/c/boissons, /fr/c/produits-laitiers, /fr/c/fruits-legumes, /fr/c/animalerie. Both MatechaBot and browser User-Agent strings are blocked. Cloudflare bot-detection challenge is triggered before any HTML catalog content is served.",
+        "robots.txt": "Returns HTTP 403 Forbidden — compliance verification is impossible; crawling cannot proceed in good faith.",
+        "google_cache": "Google cache redirect does not expose cached product HTML; returns search-error stub.",
+        "web_archive_org": "web.archive.org fetching is blocked in this environment.",
+        "common_crawl_index": "index.commoncrawl.org returns HTTP 503 for both CC-MAIN-2025-18 and CC-MAIN-2024-51 queries.",
+        "summary": "The site is fully protected by Cloudflare's bot-management layer. No HTML product data was returned on any attempted URL or via any cache/archive alternative. Robots.txt itself returns 403, making compliance verification impossible. Scraping cannot proceed without browser automation (Playwright/Puppeteer with stealth + proxy) that the current tool does not support."
+      },
+      "errors_detail": [
+        {"url": "https://www.carrefour.ma/", "error": "DNS NXDOMAIN — No address associated with hostname"},
+        {"url": "https://www.carrefour.ma/robots.txt", "error": "DNS NXDOMAIN"},
+        {"url": "https://www.carrefour.ma/fr/c/epicerie", "error": "DNS NXDOMAIN"},
+        {"url": "https://www.carrefour.ma/fr/c/boissons", "error": "DNS NXDOMAIN"},
+        {"url": "https://www.carrefour.ma/fr/c/produits-laitiers", "error": "DNS NXDOMAIN"},
+        {"url": "https://www.carrefour.ma/fr/c/fruits-legumes", "error": "DNS NXDOMAIN"},
+        {"url": "https://www.carrefour.ma/fr/c/animalerie", "error": "DNS NXDOMAIN"},
+        {"url": "https://carrefour.ma/robots.txt", "error": "Cloudflare block — HTTP 403 / challenge page"},
+        {"url": "https://carrefour.ma/", "error": "Cloudflare block — challenge page"},
+        {"url": "https://carrefour.ma/fr/c/epicerie", "error": "Cloudflare block — challenge page"},
+        {"url": "https://carrefour.ma/sitemap.xml", "error": "HTTP 403 Forbidden"},
+        {"url": "https://webcache.googleusercontent.com/search?q=cache:carrefour.ma/fr/c/epicerie", "error": "Google cache redirect — no product HTML returned"},
+        {"url": "https://web.archive.org/web/2026*/https://www.carrefour.ma/fr/c/epicerie", "error": "Blocked in this environment"},
+        {"url": "https://index.commoncrawl.org/CC-MAIN-2024-51-index?url=carrefour.ma%2Ffr%2F*", "error": "HTTP 503 Service Unavailable"}
+      ],
+      "recommended_next_steps": [
+        "Run the scraper from a Moroccan residential proxy (e.g. Bright Data, Oxylabs) where www.carrefour.ma DNS resolves and Cloudflare does not challenge.",
+        "Use Playwright with playwright-extra + puppeteer-stealth plugin to pass the Cloudflare JS challenge and cookie requirement, then extract product JSON from the rendered DOM or intercept XHR/fetch network calls to the catalog API.",
+        "Contact Carrefour Maroc's digital team for an official product data feed or API partnership (data@carrefour.ma or via the partner portal).",
+        "Check if Carrefour Maroc publishes a Google Merchant Center feed at /feed.xml, /feed/google, or /sitemap_products.xml — these are sometimes unprotected.",
+        "Explore Common Crawl WARC archives (https://commoncrawl.org) for historical Carrefour Maroc snapshots once the Common Crawl index server recovers from 503 errors."
+      ]
+    }
+  }
+]
